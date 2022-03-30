@@ -60,7 +60,7 @@ class Board extends React.Component {
     let matrx = arrayToMatrix(this.state.matrixColors, params);
     // Find Big Largest Area in Matrix
     let big_area_color = LargestAreaMatrix(matrx, this.state.matrixColors);
-
+    console.log({ big_area_color });
     this.setState({
       biggest: big_area_color,
     });
@@ -225,14 +225,14 @@ class Board extends React.Component {
                     <div className="w-100">
                       {" "}
                       Result: the biggest area contains{" "}
-                      <b>{this.state.biggest}</b> cells with color :
+                      <b>{this.state.biggest.bigArea}</b> cells with color :
                       <td
                         className="cell"
                         style={{
                           width: "2em",
                           height: "2em",
                           border: "1px solid #ddd",
-                          backgroundColor: this.state._highestColor,
+                          backgroundColor: this.state.biggest.cellColorRef,
                         }}
                       >
                         {/* <h3 style={{ color: "black" }}>{biggest ? biggest : null}</h3> */}

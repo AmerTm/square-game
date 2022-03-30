@@ -27,6 +27,8 @@ export const arrayToMatrix = (arr, width) =>
 //Find the largest Ares in Matrix
 export const LargestAreaMatrix = (matrix, arr) => {
   let bigArea = null;
+  let cellColorRef = "";
+
   arr.map((el, index) => {
     var cache = {};
     function pulse(x, y) {
@@ -56,6 +58,9 @@ export const LargestAreaMatrix = (matrix, arr) => {
             y: y,
           });
           visited[x + " " + y] = true;
+          //   console.log(visited);
+          let key = Object.keys(visited);
+          cellColorRef = findColorFromMatrixIndex(key, matrix);
           size += 1;
         }
       }
@@ -69,9 +74,10 @@ export const LargestAreaMatrix = (matrix, arr) => {
         test(cell.x, cell.y + 1, value);
       }
       // Cache the size for all visited cells for performances
-      console.log(visited);
+
+      //   console.log(Object.keys(visited));
       let obj = Object.keys(visited);
-      console.log("cccx", obj);
+      //   console.log("cccx", obj);
       for (var key in visited) {
         cache[key] = size;
       }
@@ -90,7 +96,7 @@ export const LargestAreaMatrix = (matrix, arr) => {
     }
     bigArea = max;
   });
-  return bigArea;
+  return { bigArea, cellColorRef };
 };
 
 // Highest Reapeated Color in colors Array
@@ -103,3 +109,14 @@ export const highestColor = (arr) =>
     },
     { k: {} }
   ).max;
+
+function findColorFromMatrixIndex(key, matrix, arr) {
+  let _x = key[Object.keys(key)[0]].replace(/\s/g, "")[0];
+  let _y = key[Object.keys(key)[0]].replace(/\s/g, "")[1];
+  let slectedColor = matrix[_y][_x];
+
+  console.log(_x, _y);
+  console.log(matrix);
+  console.log(slectedColor);
+  return slectedColor;
+}
